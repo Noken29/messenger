@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/registration}" th:object="${User}">
+        <div><label>Put your username : <input type="text" th:field="*{username}"/> </label></div>
+        <div><label>Put your password: <input type="password" th:field="*{password}"/> </label></div>
+        <div><label>Confirm your password: <input type="password" th:field="*{confirmPassword}"/> </label></div>
+        <div><input type="submit" value="Create account"/></div>
+    </form>
+</body>
+</html>

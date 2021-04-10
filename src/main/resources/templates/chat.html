@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Hello World!</title>
+
+</head>
+<body>
+    <!--
+    <div th:each="message : ${messages}">
+        <p th:text="${message.getUser().getUsername()} + ':'+${message.getText()}"></p>
+    </div>
+    <form th:method="POST" th:action="@{/hello/{id}(id=${chatId})}" th:object="${NewMessage}">
+        <input type="text" name="text " th:field="*{text}" value="">
+        <input type="submit" value="Send">
+    </form>
+    <form th:method="POST" th:action="@{/hello/{id}(id=${chatId})}" th:object="${User}">
+        <input type="text" th:field="*{username}">
+        <input type="submit" value="Invite">
+    </form>
+    -->
+    <div ng-app="SpringChat">
+        <div ng-controller="ChatCtrl">
+            <div>
+<!--                <p th:each="message : ${messages}" th:text="${message.getUser().getUsername()} + ':' +${message.getText()}"></p>-->
+                <p ng-repeat="message in messages">{{message.sender}}:{{message.text}}</p>
+            </div>
+
+            <form role="form" ng-submit="sendMsg()">
+                <div>
+                    <label for="text">Message</label>
+                    <div>
+                        <input type="hidden" id="user" th:value="${user}">
+                        <input type="hidden" id="chatId" th:value="${chatId}">
+                        <input type="text" class="form-control" id="text" name="text" ng-model="msg.text">
+                    </div>
+                </div>
+                <button type="submit">Send</button>
+            </form>
+            <form th:method="POST" th:action="@{/hello/{id}(id=${chatId})}" th:object="${invitedUser}">
+                <input type="text" th:field="*{username}">
+                <input type="submit" value="Invite">
+            </form>
+        </div>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../vendor/sockjs/sockjs.js" th:src="@{/vendor/sockjs/sockjs.js}" ></script>
+    <script src="../vendor/stomp/stomp.js" th:src="@{/vendor/stomp/stomp.js}" ></script>
+    <script src="../vendor/angularjs/angular.js" th:src="@{/vendor/angularjs/angular.js}" ></script>
+    <script src="../vendor/angularjs/angular-stomp.js" th:src="@{/vendor/angularjs/angular-stomp.js}" ></script>
+    <script src="../app/main.js" th:src="@{/app/main.js}" ></script>
+
+    </body>
+</html>
